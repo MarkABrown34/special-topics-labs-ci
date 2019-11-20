@@ -12,4 +12,15 @@ node {
             }
   }
   // you should add a test report here
+  node {
+      try {
+          stage('Test') {
+              withMaven (maven: 'maven3'){
+              sh "mvn test"
+              }
+          }
+      } finally {
+          junit 'target/surefire-reports/**/*.xml'
+      }
+  }
 }
